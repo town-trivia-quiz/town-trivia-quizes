@@ -1,11 +1,11 @@
 <template>
   <section id="main-page">
-    <div class="container-fluid mt-5" style="height: 1000px;">
+    <div class="container-fluid mt-3" >
       <div class="row">
-        <div class="col-8" style="background-color: #ccd5ae ;">
+        <div class="col-md-8" style="background-color: #caf0f8 ;">
           <div class="row justify-content-center mt-3 mb-3">
-            <div class="col">
-              <div class="card text-center">
+            <div class="col-md" >
+              <div class="card text-center text-white" style="background-color: #00b4d8">
                 <div class="card-body">
                   <h3>Soal No. {{ questionNumber }}</h3>
                 </div>
@@ -13,15 +13,18 @@
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-2">
-              <div class="card">
+          <div class="row text-center">
+            <div class="col-md-2">
+              <div class="card mb-2 text-white" style="background-color: #e63946">
                 <div class="card-body">
-                  <h4>SCORE : {{ score }}</h4>
+                  <h5>SCORE : </h5>
+                  <div class="row">
+                    <h1>{{ score }}</h1>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-10">
+            <div class="col-md-10">
               <div class="row justify-content-center mb-5">
                 <div
                   class="card"
@@ -38,7 +41,7 @@
                       <p>{{ question.exercise }}</p>
                     </blockquote>
                     <div class="row">
-                      <div class="col-10">
+                      <div class="col-md-10 mt-2 mb-2">
                         <input
                           type="text"
                           class="form-control"
@@ -47,7 +50,7 @@
                           v-model="answer"
                         />
                       </div>
-                      <div class="col-2">
+                      <div class="col-md-2 mt-2">
                         <button
                           type="button"
                           class="btn btn-secondary"
@@ -64,21 +67,21 @@
           </div>
         </div>
 
-        <div class="col-4" style="background-color: #faedcd;">
-          <div class="card mt-3 mb-1">
+        <div class="col-md-4" style="background-color: #faedcd;">
+          <div class="card mt-3 mb-1 text-white" style="background-color: #cb997e">
             <div class="card-body text-center">
-              <h3>Trivia Messanger</h3>
+              <h3>Trivia Messenger</h3>
             </div>
           </div>
 
-          <div class="card mt-3 overflow-auto" style="max-height: 70vh;">
+          <div class="card mt-3 overflow-auto" style="max-height: 70vh; height: 70vh; background-color: #ddbea9">
             <div class="card-body">
               <Chat v-for="(chat, i) in chats" :key="i" :chat="chat" />
             </div>
           </div>
           <hr />
           <div class="row mt-2">
-            <div class="col-8">
+            <div class="col-md-8 mt-2 mb-2">
               <input
                 type="text"
                 class="form-control"
@@ -87,7 +90,7 @@
                 v-model="chatting"
               />
             </div>
-            <div class="col-2">
+            <div class="col-md-2 mt-2 mb-2">
               <button
                 type="button"
                 class="btn btn-secondary"
