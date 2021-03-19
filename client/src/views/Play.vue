@@ -74,11 +74,6 @@
           <div class="card mt-3 overflow-auto" style="max-height: 70vh;">
             <div class="card-body">
               <Chat v-for="(chat, i) in chats" :key="i" :chat="chat" />
-              <div class="card mt-1 mb-1">
-                <div class="card-body">
-                  This is some text within a card body.
-                </div>
-              </div>
             </div>
           </div>
           <hr />
@@ -111,6 +106,7 @@
 <script>
 import { mapState } from "vuex";
 import Chat from "@/components/Chat";
+import swal from "sweetalert";
 
 export default {
   name: "Play",
@@ -119,7 +115,8 @@ export default {
       answer: "",
       questionNumber: 1,
       score: 0,
-      chatting: ""
+      chatting: "",
+      pemenang: false
     };
   },
   components: {
@@ -138,6 +135,7 @@ export default {
             icon: "success"
           });
           this.checkWinner();
+          this.finalCondition();
           this.nextQuestion();
           this.getQuestion();
         })
@@ -154,20 +152,44 @@ export default {
       this.score += 10;
     },
     checkWinner() {
-      if (this.score === 90) {
-        swal("Congratulations, You have a brain!", {
+      if (this.score === 10) {
+        this.pemenang = true;
+      }
+    },
+    finalCondition() {
+      if (this.pemenang) {
+        const name = this.username;
+        this.$socket.emit("getWiner", this.pemenang);
+        swal(`Congratulations ${name}, You are the winner!!!!`, {
           icon: "success"
         });
         this.$router.push("/");
       }
     },
     insertChatting() {
-      this.$store.commit("insertChat", this.chatting);
+      const payload = {
+        message: this.chatting,
+        username: this.username
+      };
+      this.$store.commit("insertChat", payload);
+      this.$socket.emit("replyMessage", payload);
       this.chatting = "";
     }
   },
+  sockets: {
+    sendAll(message) {
+      this.$store.commit("insertChat", message);
+    },
+    gameEnd(data) {
+      const name = this.username;
+      swal(`You loseeeeee ${name}!!!! The other player has win`, {
+        icon: "error"
+      });
+      this.$router.push("/");
+    }
+  },
   computed: {
-    ...mapState(["question", "chats"])
+    ...mapState(["question", "chats", "username"])
   },
   created() {
     this.getQuestion();
