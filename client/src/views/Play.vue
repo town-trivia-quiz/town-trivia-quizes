@@ -104,97 +104,97 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import Chat from "@/components/Chat";
-import swal from "sweetalert";
+import { mapState } from 'vuex'
+import Chat from '@/components/Chat'
+import swal from 'sweetalert'
 
 export default {
-  name: "Play",
-  data() {
+  name: 'Play',
+  data () {
     return {
-      answer: "",
+      answer: '',
       questionNumber: 1,
       score: 0,
-      chatting: "",
+      chatting: '',
       pemenang: false
-    };
+    }
   },
   components: {
     Chat
   },
   methods: {
-    getAnswer() {
+    getAnswer () {
       const payload = {
         answer: this.answer,
         questionNumber: this.questionNumber
-      };
+      }
       this.$store
-        .dispatch("checkAnswer", payload)
+        .dispatch('checkAnswer', payload)
         .then(data => {
-          swal("Hooray! Your answer is correct!", {
-            icon: "success"
-          });
-          this.checkWinner();
-          this.finalCondition();
-          this.nextQuestion();
-          this.getQuestion();
+          swal('Hooray! Your answer is correct!', {
+            icon: 'success'
+          })
+          this.checkWinner()
+          this.finalCondition()
+          this.nextQuestion()
+          this.getQuestion()
         })
-        .catch(err => {
-          swal("Hooo! Your answer is incorrect!", "", "error");
-        });
-      this.answer = "";
+        .catch(() => {
+          swal('Hooo! Your answer is incorrect!', '', 'error')
+        })
+      this.answer = ''
     },
-    getQuestion() {
-      this.$store.dispatch("searchQuestion", this.questionNumber);
+    getQuestion () {
+      this.$store.dispatch('searchQuestion', this.questionNumber)
     },
-    nextQuestion() {
-      this.questionNumber++;
-      this.score += 10;
+    nextQuestion () {
+      this.questionNumber++
+      this.score += 10
     },
-    checkWinner() {
-      if (this.score === 10) {
-        this.pemenang = true;
+    checkWinner () {
+      if (this.score === 90) {
+        this.pemenang = true
       }
     },
-    finalCondition() {
+    finalCondition () {
       if (this.pemenang) {
-        const name = this.username;
-        this.$socket.emit("getWiner", this.pemenang);
+        const name = this.username
+        this.$socket.emit('getWiner', this.pemenang)
         swal(`Congratulations ${name}, You are the winner!!!!`, {
-          icon: "success"
-        });
-        this.$router.push("/");
+          icon: 'success'
+        })
+        this.$router.push('/')
       }
     },
-    insertChatting() {
+    insertChatting () {
       const payload = {
         message: this.chatting,
         username: this.username
-      };
-      this.$store.commit("insertChat", payload);
-      this.$socket.emit("replyMessage", payload);
-      this.chatting = "";
+      }
+      this.$store.commit('insertChat', payload)
+      this.$socket.emit('replyMessage', payload)
+      this.chatting = ''
     }
   },
   sockets: {
-    sendAll(message) {
-      this.$store.commit("insertChat", message);
+    sendAll (message) {
+      this.$store.commit('insertChat', message)
     },
-    gameEnd(data) {
-      const name = this.username;
+    gameEnd (data) {
+      const name = this.username
       swal(`You loseeeeee ${name}!!!! The other player has win`, {
-        icon: "error"
-      });
-      this.$router.push("/");
+        icon: 'error'
+      })
+      this.$router.push('/')
     }
   },
   computed: {
-    ...mapState(["question", "chats", "username"])
+    ...mapState(['question', 'chats', 'username'])
   },
-  created() {
-    this.getQuestion();
+  created () {
+    this.getQuestion()
   }
-};
+}
 </script>
 
 <style scoped></style>

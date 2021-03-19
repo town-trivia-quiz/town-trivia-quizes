@@ -7,15 +7,15 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex'
 
 export default {
-  name: "Chat",
-  props: ["chat"],
+  name: 'Chat',
+  props: ['chat'],
   computed: {
-    ...mapState(["username", "chats"])
+    ...mapState(['username', 'chats'])
   }
-};
+}
 </script>
 
 <style></style>

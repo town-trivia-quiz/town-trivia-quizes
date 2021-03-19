@@ -50,7 +50,7 @@ module.exports = {
       {
         exercise: "Kota ini identik dengan klub chelsea?",
         answer: "LONDON",
-        imageUrl: "https://unsplash.com/photos/iXqTqC-f6jI",
+        imageUrl: "https://pariwisataindonesia.id/wp-content/uploads/2019/11/The-Big-Ben-London-500x293.jpg",
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -69,14 +69,14 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        exercise: "Kota yang terkenal dengan soto dan masjid Kubanya?",
+        exercise: "Kota yang terkenal dengan soto dan masjid Kubahnya?",
         answer: "MAKASAR",
         imageUrl: "https://i.imgur.com/TNeSTyT.jpg",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        exercise: "Kota terdinging di dunia?",
+        exercise: "Kota terdingin di dunia?",
         answer: "YAKUTS",
         imageUrl: "https://blogpictures.99.co/kota-terdingin-dunia-yakuts.jpg",
         createdAt: new Date(),
@@ -87,12 +87,14 @@ module.exports = {
     return queryInterface.bulkInsert('Questions', question, {})
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: (queryInterface, Sequelize) => {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+
+     return queryInterface.bulkDelete('Questions', null, {})
   }
 };

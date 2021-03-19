@@ -42,20 +42,20 @@
 
 <script>
 export default {
-  name: "Home",
-  data() {
+  name: 'Home',
+  data () {
     return {
-      username: ""
-    };
+      username: ''
+    }
   },
   methods: {
-    login() {
-      this.$store.commit("addUser", this.username);
-      this.username = "";
-      this.$router.push("/play");
+    login () {
+      this.$store.commit('addUser', this.username)
+      this.username = ''
+      this.$router.push('/play')
     }
   }
-};
+}
 </script>
 
 <style></style>

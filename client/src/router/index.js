@@ -1,26 +1,26 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Play from "../views/Play.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Play from '../views/Play.vue'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/play",
-    name: "Play",
+    path: '/play',
+    name: 'Play',
     component: Play
   },
   {
-    path: "/",
-    name: "Home",
-    component: () => import("../views/Home.vue")
+    path: '/',
+    name: 'Home',
+    component: () => import('../views/Home.vue')
   }
-];
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
-});
+})
 
-export default router;
+export default router
